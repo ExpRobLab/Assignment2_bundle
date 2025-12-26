@@ -41,13 +41,13 @@ mkdir src
 Import repositories (if the bundle supplies .repos files inside the cloned repo) from within your workspace:
 
 ```bash
-vsc import src < assignment2_https.repos
+vcs import src < assignment2_https.repos
 ```
 
 or with ssh 
 
 ```bash
-vsc import src < assignemnt2_ssh.repos
+vcs import src < assignemnt2_ssh.repos
 ```
 
 build
