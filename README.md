@@ -51,6 +51,24 @@ or with ssh
 vcs import src < assignemnt2_ssh.repos
 ```
 
+If you want to use also the simulation of the Husarion Rosbot:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3-pip ros-dev-tools
+
+export HUSARION_ROS_BUILD_TYPE=simulation
+vcs import src < src/rosbot_ros/rosbot/rosbot_${HUSARION_ROS_BUILD_TYPE}.repos
+
+export PIP_BREAK_SYSTEM_PACKAGES=1
+sudo rosdep init
+rosdep update --rosdistro $ROS_DISTRO
+rosdep install colcon build --symlink-install --packages-up-to
+rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+
+colcon build --symlink-install --packages-up-to rosbot --cmake-args -DCMAKE_BUILD_TYPE=Release
+```
+
 build
 
 ```bash
