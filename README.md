@@ -29,6 +29,7 @@ sudo apt install -y \
   ros-$ROS_DISTRO-moveit-servo\
   ros-$RIS_DISTRO-moveit-msgs\
   ros-$ROS_DISTRO-localization\
+  ros-$ROS_DISTRO-plansys2-*\
 
 sudo apt update
 sudo apt install python3-vcstool
