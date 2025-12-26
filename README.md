@@ -50,6 +50,8 @@ or with ssh
 vsc import src < assignemnt2_ssh.repos
 ```
 
+build
+
 ```bash
 colcon build --symlink-install --packages-up-to assignment2 bme_gazebo_basics worlds_manager aruco_opencv_msgs aruco_opencv
 
