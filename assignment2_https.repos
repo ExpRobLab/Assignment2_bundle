@@ -1,8 +1,4 @@
 repositories:
-  assignment2:
-    type: git
-    url: https://github.com/ExpRobLab/assignment2.git
-    version: main
   bme_gazebo_basics:
     type: git
     url: https://github.com/ExpRobLab/bme_gazebo_basics.git
