@@ -1,0 +1,39 @@
+# ROS 2 build artifacts
+/build/
+/install/
+/log/
+
+# Colcon intermediate files
+/colcon.meta
+/colcon_cached_setup.sh
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# VS Code / IDE settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# ROS 2 local overrides
+*.launch.py~
+*.urdf~
+*.xacro~
+
+src/*
