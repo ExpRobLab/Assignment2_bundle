@@ -32,7 +32,7 @@ sudo apt install -y \
 
 sudo apt update
 sudo apt install python3-vcstool
-
+https://github.com/ExpRobLab/assignment2.git
 git clone https://github.com/ExpRobLab/assignment2_bundle.git assignment2_ws
 cd assignment2_ws
 mkdir src
