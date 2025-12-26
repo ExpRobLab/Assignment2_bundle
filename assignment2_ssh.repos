@@ -1,0 +1,21 @@
+repositories:
+  assignment1:
+    type: git
+    url: git@github.com:ExpRobLab/assignment2.git
+    version: main
+  bme_gazebo_basics:
+    type: git
+    url: git@github.com:ExpRobLab/bme_gazebo_basics.git
+    version: main
+  worlds_manager:
+    type: git
+    url: git@github.com:ExpRobLab/world_manager.git
+    version: main
+  rosbot_ros:
+    type: git
+    url: git@github.com:husarion/rosbot_ros.git
+    version: jazzy
+  ros_aruco_opencv:
+    type: git
+    url: git@github.com:ExpRobLab/ros_aruco_opencv.git
+    version: ros2
