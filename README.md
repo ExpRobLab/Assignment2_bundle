@@ -30,7 +30,7 @@ sudo apt install -y \
   ros-$RIS_DISTRO-moveit-msgs\
   ros-$ROS_DISTRO-localization\
   ros-$ROS_DISTRO-plansys2-*\
-  ros-$ROS_DISTRO-nav2-msgs
+  ros-$ROS_DISTRO-nav2-msgs\
 
 sudo apt update
 sudo apt install python3-vcstool
