@@ -19,3 +19,11 @@ repositories:
     type: git
     url: https://github.com/ExpRobLab/ros_aruco_opencv.git
     version: ros2
+  ros2_navigation:
+    type: git
+    url: https://github.com/ExpRobLab/ros2_navigation.git
+    version: main
+  plansys_interface:
+    type: git
+    url: https://github.com/ExpRobLab/plansys_interface.git
+    version: main
