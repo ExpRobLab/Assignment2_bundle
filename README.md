@@ -32,6 +32,8 @@ sudo apt install -y \
   ros-$ROS_DISTRO-plansys2-*\
   ros-$ROS_DISTRO-nav2*\
   ros-$ROS_DISTRO-slam-toolbox\
+  ros-$ROS_DISTRO-nav2-bringup\
+  ros-$ROS_DISTRO-navigation2\
  
 
 sudo apt update
