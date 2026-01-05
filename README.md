@@ -22,7 +22,8 @@ Implemented the assignment both:
 - [x] in simulation (the world file assignment2.world is given);
 - [ ] in the real robot.
 
-### Requirement:
+Assignment requirements:
+
 - [x] Used PlanSys2 to plan the actions of the robot;
 - [x] Created one (or more, if needed) ROS2 packages that implement the requested behavior;
 - [x] Published the new package on your own repository;
@@ -106,11 +107,7 @@ rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
 colcon build --symlink-install --packages-up-to rosbot --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-## Task Planning with PlanSys2: ArUco marker search & capture in Gazebo
-
-### Planning – PPDL & PlanSys2
-
-#### Overview
+## Proposed solution
 
 We control a mobile robot in Gazebo to search an environment until all ArUco markers are found and then visit and “capture” each marker in ascending ID order. The behavior is modeled in PDDL and executed using PlanSys2 – a planner generates a valid sequence of actions (e.g., explore → capture), and an executor runs it by activating our ROS 2 “action performer” nodes. Captures are produced by annotating the camera image and saving the final frames to disk, while also publishing the annotated image on a topic.
 
@@ -127,42 +124,28 @@ We control a mobile robot in Gazebo to search an environment until all ArUco mar
   </tr>
 </table>
 
----
+The environment contains four ArUco markers whose positions are initially unknown. To ensure a systematic search and prevent endless rotation, we define four exploration waypoints corresponding to the map corners:
 
-### 1) Main idea
+- $x_1 = -6.0,\space y_1= -6.0$ → `wp1 = (-6.0, -6.0)`;
+- $x_2 = -6.0,\space y_2 = 6.0$ → `wp2 = (-6.0,  6.0)`;
+- $x_3= 6.0,\space y_3 = -6.0$ → `wp3 = ( 6.0, -6.0)`;
+- $x_4 = 6.0,\space y_4 = 6.0$ → `wp4 = ( 6.0,  6.0)`.
 
-The environment contains $4$ ArUco markers placed somewhere in the world.  
-To make the search systematic (and avoid spinning forever), we define $4$ exploration waypoints that cover the map corners:
+In this solution is proposed a PDDL domai with trhee action:
 
-- `wp1 = (-6.0, -6.0)`
-- `wp2 = (-6.0,  6.0)`
-- `wp3 = ( 6.0, -6.0)`
-- `wp4 = ( 6.0,  6.0)`
+1. **Search phase**: The robot navigates among the waypoints until it has detected all $4$ markers at least once.
+2. **Transition phase**:
+3. **Capture phase**: Once all markers are known, the robot goes to each marker in ascending marker ID, centers it, then publishes and saves the annotated image.
 
-**High-level idea:** (need to change based on our final implement, put the first one as place holder)
+### PlanSys2
 
-1) **Search phase**  
-   The robot navigates among the waypoints until it has detected all $4$ markers at least once.
+The ROS2 Planning System offers robotics developers a straightforward and efficient PDDL-based planning framework implemented implemented in ROS2. Its workflow consists of:
 
-2) **Capture phase**  
-   Once all markers are known, the robot goes to each marker in ascending marker ID, centers it, then publishes and saves the annotated image.
+- Encoding the task logic in PDDL;
+- Letting the planner generate a valid action sequence;
+- Implementing each action as a ROS 2 node.
 
-This two-phase structure is important because planning becomes clean:
-- Phase 1 goal: “all markers found”
-- Phase 2 goal: “all markers captured (in order)”
-
----
-
-### 2) Why PlanSys2?
-
-PlanSys2 splits the planning pipeline into components so instead of hard-coding a giant state machine, we:
-- encode the logic in PDDL,
-- let the planner generate a valid action sequence,
-- implement each action as a ROS 2 node.
-
----
-
-### 3) Repository structure
+### Repository structure
 <!-- TODO: fix this with tree -L 3 in the workspace -->
 - `src/`
   - `assignment_plansys2/`
@@ -179,7 +162,7 @@ PlanSys2 splits the planning pipeline into components so instead of hard-coding 
       - `assignment.launch.py` (Gazebo + Robot)
 ---
 
-### 4) PDDL model (Milad's code)
+## 4) PDDL model (Milad's code)
 <!-- TODO: remove "(Milad's code)" and fix below probably -->
 
 #### 4.1 Types & objects
