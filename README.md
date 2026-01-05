@@ -92,10 +92,9 @@ rosdep install --from-paths src --ignore-src -r -y
 ```
 
 Then build:
-<!-- TODO: --packages-up-to check all the pkg names -->
 
 ```bash
-colcon build --symlink-install --packages-up-to assignment2 bme_gazebo_basics worlds_manager aruco_opencv_msgs aruco_opencv
+colcon build --symlink-install --packages-up-to assignment2 bme_gazebo_basics worlds_manager aruco_opencv_msgs aruco_opencv ros2_navigation plansys_interface
 
 source install/local_setup.bash
 ```
@@ -143,12 +142,11 @@ The environment contains four ArUco markers whose positions are initially unknow
 - $x_3= 6.0,\space y_3 = -6.0$ → `wp3 = ( 6.0, -6.0)`;
 - $x_4 = 6.0,\space y_4 = 6.0$ → `wp4 = ( 6.0,  6.0)`.
 
-In this solution is proposed a PDDL domai with trhee action:
-<!-- TODO: describe better the 3 actions -->
+In this solution is proposed a PDDL domain with three actions:
 
-1. **Search phase**: The robot navigates among the waypoints until it has detected all $4$ markers at least once.
-2. **Transition phase**:
-3. **Capture phase**: Once all markers are known, the robot goes to each marker in ascending marker ID, centers it, then publishes and saves the annotated image.
+1. **Move to detect action**: The robot navigates through the waypoints, recording the positions of all detected ArUco markers;
+2. **Change state action**: The robot sorts the detected markers, removes any duplicates, and selects the lowest marker for each ArUco box;
+3. **Move to photograph action**: The robot approaches each selected marker in ascending order of marker ID, centers it, takes a photo, publishes it to the `/camera/image topic`, and saves a copy of the annotated image in the `./assignment2_ws/images/` folder.
 
 ### PlanSys2
 
@@ -160,22 +158,26 @@ The ROS2 Planning System offers robotics developers a straightforward and effici
 
 ### Repository structure
 <!-- TODO: fix this with tree -L 3 in the workspace -->
-- `src/`
-  - `assignment_plansys2/`
-    - `pddl/`
-      - `domain.pddl` (PDDL domain)
-      - `problem.pddl` (PDDL problem)
-    - `launch/`
-      - `plansys2_assignment.launch.py` (PlanSys2)
-    - `src/`
-      - `capture_action_node.cpp` (Capture action server)
-      - `explore_action_node.cpp` (Explore action server)
-  - `assignment1/`
-    - `launch/`
-      - `assignment.launch.py` (Gazebo + Robot)
----
+```text
+signment2_ws
+ assignment2_https.repos
 
-## 4) PDDL model (Milad's code)
+├── assignment2_ssh.repos
+
+├── build
+
+├── images
+
+├── install
+
+├── log
+
+├── points_detected
+
+├── README.md
+
+└── src
+```## 4) PDDL model (Milad's code)
 <!-- TODO: remove "(Milad's code)" and fix below probably -->
 
 #### 4.1 Types & objects
