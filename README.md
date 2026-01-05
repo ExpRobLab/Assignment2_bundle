@@ -3,6 +3,16 @@
 **Authors:**  
 Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Arian Tavousi, Milad Rabiei
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation and configuration – bundle workspace](#installation-and-configuration--bundle-workspace)
+  - [Prerequisites](#prerequisites)
+  - [Husarion robot simulation](#husarion-robot-simulation)
+- [Proposed solution](#proposed-solution)
+- [PlanSys2](#plansys2)
+- [Repository structure](#repository-structure)
+
 ## Overview
 
 Developed a ROS2 package that lets a mobile robot endowed with a camera:
