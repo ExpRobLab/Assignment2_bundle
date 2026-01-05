@@ -31,14 +31,16 @@ Assignment requirements:
 - [ ] Added a video to your ReadMe, showing the behaviour of owr code:
   - [ ]  Added a video to your ReadMe, showing the behaviour of owr code with real robot.
 
-## Prerequisites
-
-- Ubuntu 22.04 for ROS 2 Humble or Ubuntu 24.04 for ROS 2 Jazzy;
-- ROS 2 Humble and Jazzy;
-- Gazebo Harmonic;
-- Python 3.10 for ROS 2 Humble and Python 3.12.3 for ROS 2 Jazzy;
-
 ## Installation and configuration – bundle workspace
+
+>[!NOTE]
+>### Prerequisites
+>
+>- Ubuntu 22.04 for ROS 2 Humble or Ubuntu 24.04 for ROS 2 Jazzy;
+>- Python 3.10 for ROS 2 Humble and Python 3.12.3 for ROS 2 Jazzy;
+>- ROS 2 Humble and Jazzy;
+>- Gazebo Harmonic;
+
 This assignment is provided as a ready-to-go ROS 2 workspace and uses vcs to import referenced repositories, the correct workflow after cloning should look like this:
 
 ```bash
@@ -55,13 +57,13 @@ Import repositories (if the bundle supplies .repos files inside the cloned repo)
 vcs import src < assignment2_https.repos
 ```
 
-or with ssh 
+or with ssh:
 
 ```bash
 vcs import src < assignment2_ssh.repos
 ```
 
-Install ROS 2 dependencies
+Install dependencies:
 
 > [!WARNING]
 > The repo references `ros_aruco_opencv` external package. Make sure that package is available in your `src` and that you check-out a branch compatible with your ROS 2 distro if necessary. The package maintainer may have a branch per ROS distro. If using Humble or Jazzy, check out to the matching branch.
@@ -75,11 +77,11 @@ sudo apt-get updateudo apt install -y python3-pip ros-dev-tools ros-$ROS_DISTRO-
   ros-$ROS_DISTRO-moveit-msgs ros-$ROS_DISTRO-localization ros-$ROS_DISTRO-plansys2-* ros-$ROS_DISTRO-nav2*\
   ros-$ROS_DISTRO-slam-toolbox ros-$ROS_DISTRO-nav2-bringup ros-$ROS_DISTRO-navigation2
 
-osdep update
+rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
-Then build
+Then build:
 <!-- TODO: --packages-up-to check all the pkg names -->
 
 ```bash
@@ -132,6 +134,7 @@ The environment contains four ArUco markers whose positions are initially unknow
 - $x_4 = 6.0,\space y_4 = 6.0$ → `wp4 = ( 6.0,  6.0)`.
 
 In this solution is proposed a PDDL domai with trhee action:
+<!-- TODO: describe better the 3 actions -->
 
 1. **Search phase**: The robot navigates among the waypoints until it has detected all $4$ markers at least once.
 2. **Transition phase**:
