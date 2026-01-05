@@ -11,6 +11,7 @@ Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Ar
   - [Husarion robot simulation](#husarion-robot-simulation)
 - [Proposed solution](#proposed-solution)
 - [PlanSys2](#plansys2)
+- [RQT graph](#rqt-graph) 
 - [Repository structure](#repository-structure)
 
 ## Overview
@@ -156,28 +157,80 @@ The ROS2 Planning System offers robotics developers a straightforward and effici
 - Letting the planner generate a valid action sequence;
 - Implementing each action as a ROS 2 node.
 
+### RQT graph
+
+
+
 ### Repository structure
-<!-- TODO: fix this with tree -L 3 in the workspace -->
+
 ```text
-signment2_ws
- assignment2_https.repos
-
+assignment2_ws/
+├── assignment2_https.repos
 ├── assignment2_ssh.repos
-
 ├── build
-
 ├── images
-
 ├── install
-
 ├── log
-
 ├── points_detected
-
 ├── README.md
-
 └── src
-```## 4) PDDL model (Milad's code)
+    ├── assignment2
+    │   ├── CMakeLists.txt
+    │   ├── launch
+    │   ├── package.xml
+    │   ├── README.md
+    ├── bme_gazebo_basics
+    │   ├── action
+    │   ├── CMakeLists.txt
+    │   ├── config
+    │   ├── launch
+    │   ├── meshes
+    │   ├── package.xml
+    │   ├── rviz
+    │   ├── urdf
+    │   └── worlds
+    ├── husarion_components_description
+    │   ├── ...
+    ├── husarion_controllers
+    │   ├── ...
+    ├── husarion_gz_worlds
+    │   ├── ...
+    ├── plansys_interface
+    │   ├── CMakeLists.txt
+    │   ├── domain
+    │   │   ├── domain.pddl
+    │   │   └── problem.pddl
+    │   ├── launch
+    │   │   └── actions_launcher.launch.py
+    │   ├── package.xml
+    │   ├── README.md
+    │   └── src
+    │       ├── change_state_action_node.cpp
+    │       ├── getplan_and_execute.cpp
+    │       ├── getplan.cpp
+    │       ├── move_to_detect_action_node.cpp
+    │       └── move_to_photograph_action_node.cpp
+    ├── ros2_navigation
+    │   ├── CMakeLists.txt
+    │   ├── config
+    │   ├── launch
+    │   ├── maps
+    │   └── package.xml
+    ├── ros_aruco_opencv
+    │   ├── aruco_opencv
+    │   ├── aruco_opencv_msgs
+    │   └── package.xml
+    ├── rosbot_ros
+    │   ├── ...
+    └── worlds_manager
+        ├── CMakeLists.txt
+        ├── launch
+        ├── models
+        ├── package.xml
+        └── worlds
+```
+
+## 4) PDDL model (Milad's code)
 <!-- TODO: remove "(Milad's code)" and fix below probably -->
 
 #### 4.1 Types & objects
