@@ -62,6 +62,9 @@ vcs import src < assignment2_ssh.repos
 
 Install ROS 2 dependencies
 
+> [!WARNING]
+> The repo references `ros_aruco_opencv` external package. Make sure that package is available in your `src` and that you check-out a branch compatible with your ROS 2 distro if necessary. The package maintainer may have a branch per ROS distro. If using Humble or Jazzy, check out to the matching branch.
+
 ```bash
 sudo apt-get updateudo apt install -y python3-pip ros-dev-tools ros-$ROS_DISTRO-control-msgs ros-$ROS_DISTRO-control-toolbox\
   ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers ros-$ROS_DISTRO-joy ros-$ROS_DISTRO-teleop-twist-joy\
@@ -84,9 +87,6 @@ colcon build --symlink-install --packages-up-to assignment2 bme_gazebo_basics wo
 source install/local_setup.bash
 ```
 
-> [!WARNING]
-> The repo references `ros_aruco_opencv` external package. Make sure that package is available in your `src` and that you check-out a branch compatible with your ROS 2 distro if necessary. The package maintainer may have a branch per ROS distro. If using Humble or Jazzy, check out to the matching branch.
-
 ### Husarion robot simulation
 If you want to use also the simulation of the Husarion Rosbot:
 
@@ -106,12 +106,13 @@ rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
 colcon build --symlink-install --packages-up-to rosbot --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-## Task Planning with PlanSys2: ArUco marker search & capture in Gazebo (ROS 2)
+## Task Planning with PlanSys2: ArUco marker search & capture in Gazebo
 
-### Experimental Robotics Laboratory — Planning Assignment (PlanSys2)
+### Planning – PPDL & PlanSys2
 
-**Short description:**  
-We control a mobile robot in Gazebo to search an environment until all ArUco markers are found and then visit and “capture” each marker in ascending ID order. The behavior is modeled in PDDL and executed using PlanSys2: a planner generates a valid sequence of actions (e.g., explore → capture), and an executor runs it by activating our ROS 2 “action performer” nodes. Captures are produced by annotating the camera image and saving the final frames to disk, while also publishing the annotated image on a topic.
+#### Overview
+
+We control a mobile robot in Gazebo to search an environment until all ArUco markers are found and then visit and “capture” each marker in ascending ID order. The behavior is modeled in PDDL and executed using PlanSys2 – a planner generates a valid sequence of actions (e.g., explore → capture), and an executor runs it by activating our ROS 2 “action performer” nodes. Captures are produced by annotating the camera image and saving the final frames to disk, while also publishing the annotated image on a topic.
 
 <!-- TODO: Images are not present -->
 
