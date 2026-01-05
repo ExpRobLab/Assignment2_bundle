@@ -30,30 +30,24 @@ Implemented the assignment both:
 - [ ] Added a video to your ReadMe, showing the behaviour of owr code:
   - [ ]  Added a video to your ReadMe, showing the behaviour of owr code with real robot.
 
+## Prerequisites
 
-## Installation (bundle workspace)
-This repository is provided as a bundle (multiple packages + repos files). The recommended workflow is to create a workspace and use vcs to import the referenced repositories.
+- Ubuntu 22.04 for ROS 2 Humble or Ubuntu 24.04 for ROS 2 Jazzy;
+- ROS 2 Humble and Jazzy;
+- Gazebo Harmonic;
+- Python 3.10 for ROS 2 Humble and Python 3.12.3 for ROS 2 Jazzy;
 
-Clone the assignment bundle (example):
+## Installation and configuration – bundle workspace
+This assignment is provided as a ready-to-go ROS 2 workspace and uses vcs to import referenced repositories, the correct workflow after cloning should look like this:
 
 ```bash
-sudo apt-get update
-sudo apt install -y python3-pip ros-dev-tools ros-$ROS_DISTRO-control-msgs ros-$ROS_DISTRO-control-toolbox\
-  ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers ros-$ROS_DISTRO-joy ros-$ROS_DISTRO-teleop-twist-joy\
-  ros-$ROS_DISTRO-moveit ros-$ROS_DISTRO-moveit-ros-planning ros-$ROS_DISTRO-moveit-ros-move-group\
-  ros-$ROS_DISTRO-moveit-core ros-$ROS_DISTRO-moveit-plugins ros-$ROS_DISTRO-tf2 ros-$ROS_DISTRO-tf2-ros\
-  ros-$ROS_DISTRO-tf2-geometry-msgs ros-$ROS_DISTRO-xacro ros-$ROS_DISTRO-urdf ros-$ROS_DISTRO-moveit-servo\
-  ros-$RIS_DISTRO-moveit-msgs ros-$ROS_DISTRO-localization ros-$ROS_DISTRO-plansys2-* ros-$ROS_DISTRO-nav2*\
-  ros-$ROS_DISTRO-slam-toolbox ros-$ROS_DISTRO-nav2-bringup ros-$ROS_DISTRO-navigation2\
+git clone https://github.com/ExpRobLab/assignment2_bundle.git assignment2_ws
+cd assignment2_ws
+mkdir -p src
 
 sudo apt update
 sudo apt install python3-vcstool
-
-git clone https://github.com/ExpRobLab/assignment2_bundle.git assignment2_ws
-cd assignment2_ws
-mkdir src
 ```
-
 Import repositories (if the bundle supplies .repos files inside the cloned repo) from within your workspace:
 
 ```bash
@@ -63,10 +57,24 @@ vcs import src < assignment2_https.repos
 or with ssh 
 
 ```bash
-vcs import src < assignemnt2_ssh.repos
+vcs import src < assignment2_ssh.repos
+```
+
+Install ROS 2 dependencies
+
+```sudo apt-get updateudo apt install -y python3-pip ros-dev-tools ros-$ROS_DISTRO-control-msgs ros-$ROS_DISTRO-control-toolbox\
+  ros-$ROS_DISTRO-ros2-control ros-$ROS_DISTRO-ros2-controllers ros-$ROS_DISTRO-joy ros-$ROS_DISTRO-teleop-twist-joy\
+  ros-$ROS_DISTRO-moveit ros-$ROS_DISTRO-moveit-ros-planning ros-$ROS_DISTRO-moveit-ros-move-group\
+  ros-$ROS_DISTRO-moveit-core ros-$ROS_DISTRO-moveit-plugins ros-$ROS_DISTRO-tf2 ros-$ROS_DISTRO-tf2-ros\
+  ros-$ROS_DISTRO-tf2-geometry-msgs ros-$ROS_DISTRO-xacro ros-$ROS_DISTRO-urdf ros-$ROS_DISTRO-moveit-servo\
+  ros-$ROS_DISTRO-moveit-msgs ros-$ROS_DISTRO-localization ros-$ROS_DISTRO-plansys2-* ros-$ROS_DISTRO-nav2*\
+  ros-$ROS_DISTRO-slam-toolbox ros-$ROS_DISTRO-nav2-bringup ros-$ROS_DISTRO-navigation2
+osdep update
+rosdep install --from-paths src --ignore-src -r -y
 ```
 
 Then build
+<!-- TODO: --packages-up-to check all the pkg names -->
 
 ```bash
 colcon build --symlink-install --packages-up-to assignment2 bme_gazebo_basics worlds_manager aruco_opencv_msgs aruco_opencv
@@ -103,6 +111,8 @@ colcon build --symlink-install --packages-up-to rosbot --cmake-args -DCMAKE_BUIL
 **Short description:**  
 We control a mobile robot in Gazebo to search an environment until all ArUco markers are found and then visit and “capture” each marker in ascending ID order. The behavior is modeled in PDDL and executed using PlanSys2: a planner generates a valid sequence of actions (e.g., explore → capture), and an executor runs it by activating our ROS 2 “action performer” nodes. Captures are produced by annotating the camera image and saving the final frames to disk, while also publishing the annotated image on a topic.
 
+<!-- TODO: Images are not present -->
+
 <table>
   <tr>
     <td><b>Gazebo </b></td>
@@ -118,8 +128,8 @@ We control a mobile robot in Gazebo to search an environment until all ArUco mar
 
 ### 1) Main idea
 
-The environment contains 4 ArUco markers placed somewhere in the world.  
-To make the search systematic (and avoid spinning forever), we define 4 exploration waypoints that cover the map corners:
+The environment contains $4$ ArUco markers placed somewhere in the world.  
+To make the search systematic (and avoid spinning forever), we define $4$ exploration waypoints that cover the map corners:
 
 - `wp1 = (-6.0, -6.0)`
 - `wp2 = (-6.0,  6.0)`
@@ -129,10 +139,10 @@ To make the search systematic (and avoid spinning forever), we define 4 explorat
 **High-level idea:** (need to change based on our final implement, put the first one as place holder)
 
 1) **Search phase**  
-   The robot navigates among the waypoints until it has detected all 4 markers at least once.
+   The robot navigates among the waypoints until it has detected all $4$ markers at least once.
 
 2) **Capture phase**  
-   Once all markers are known, the robot goes to each marker in ascending marker ID, centers it, then publishes + saves the annotated image.
+   Once all markers are known, the robot goes to each marker in ascending marker ID, centers it, then publishes and saves the annotated image.
 
 This two-phase structure is important because planning becomes clean:
 - Phase 1 goal: “all markers found”
@@ -150,7 +160,7 @@ PlanSys2 splits the planning pipeline into components so instead of hard-coding 
 ---
 
 ### 3) Repository structure
-
+<!-- TODO: fix this with tree -L 3 in the workspace -->
 - `src/`
   - `assignment_plansys2/`
     - `pddl/`
@@ -167,6 +177,7 @@ PlanSys2 splits the planning pipeline into components so instead of hard-coding 
 ---
 
 ### 4) PDDL model (Milad's code)
+<!-- TODO: remove "(Milad's code)" and fix below probably -->
 
 #### 4.1 Types & objects
 
@@ -235,19 +246,6 @@ This project implements two PDDL actions, each backed by a ROS 2 performer node:
 
 #### 6.4 Saved artifacts
 - `output/marker_<id>.png` (final annotated captures)
-
----
-
-### 7) Prerequisites
-
-- OS: Ubuntu (tested on Ubuntu 22 for ROS 2 Humble and Ubuntu 24 for ROS 2 Jazzy).
-- ROS 2: Humble (works) and Jazzy (works)
-- Gazebo Harmonic is used — confirm the exact Gazebo version matching the ROS 2 distro.
-- Python: system Python3 (version used by ROS 2 distro; typically 3.10+).
-- System tools: colcon, vcstool (python3-vcstool), development libraries for ROS2 packages.
-- OpenCV + cv_bridge (for image annotation)
-- PlanSys2 binaries:
-  - `ros-<distro>-plansys2-*`
 
 ---
 
