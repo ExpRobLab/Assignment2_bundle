@@ -8,7 +8,7 @@ Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Ar
 Developed a ROS2 package that lets a mobile robot endowed with a camera:
 
 - [x] find all markers in the environment;
-- [x] implemented the same approach of assignment 1 -> the robot goes to the one with the lowest ID, it “takes a picture” modifying the image, it moves to the next one.
+- [x] implemented the same approach of assignment 1 → the robot goes to the one with the lowest ID, it “takes a picture” modifying the image, it moves to the next one.
 
 There are $4$ waypoints, that the robot can visit to detect each marker:
 
