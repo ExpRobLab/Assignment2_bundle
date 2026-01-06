@@ -230,7 +230,7 @@ assignment2_ws/
         └── worlds
 ```
 
-## 4) PDDL model (Milad's code)
+## 4) PDDL model
 <!-- TODO: remove "(Milad's code)" and fix below probably -->
 
 #### 4.1 Types & objects
@@ -243,7 +243,7 @@ assignment2_ws/
 - `(pipeline_explored ?r)` — "explore" phase completed
 - `(pipeline_captured ?r)` — final annotated “capture” completed
 
-#### 4.3 Actions (typical split)
+#### 4.3 Actions
 
 1) `explore(?r)`  
    Durative action. Start exploring the waypoints:
@@ -256,7 +256,7 @@ assignment2_ws/
    - save image to disk   
 ---
 
-### 5) Nodes and runtime logic (plansys yes or no?)
+### 5) Nodes and runtime logic
 
 #### 5.1 PlanSys2 orchestration
 - Domain Expert loads the PDDL domain (actions, predicates, types).
@@ -281,7 +281,7 @@ This project implements two PDDL actions, each backed by a ROS 2 performer node:
 
 ---
 
-### 6) Topics, TF, and outputs (needs double checking)
+### 6) Topics, TF, and outputs
 
 #### 6.1 Subscribed topics
 - `/camera/image/compressed`
@@ -303,7 +303,7 @@ This project implements two PDDL actions, each backed by a ROS 2 performer node:
 
 ---
 
-### 8) Build & run (Milad vers)
+### 8) Build & run
 
 #### 8.1 Build workspace
 ```bash
@@ -336,6 +336,4 @@ In the second terminal, run `get plan` in order to generate a plan and then run 
 ### 9) Results (place holder)
 #### 9.1 Output images
 
-#### 9.2 RQT graph / node graph
-
-#### 9.3 Video demo
+#### 9.2 Video demo
