@@ -125,16 +125,9 @@ We control a mobile robot in Gazebo to search an environment until all ArUco mar
 
 <!-- TODO: Images are not present -->
 
-<table>
-  <tr>
-    <td><b>Gazebo </b></td>
-    <td><b>PlanSys2 </b></td>
-  </tr>
-  <tr>
-    <td><img src="docs/gazebo.png" width="533" height="300"></td>
-    <td><img src="docs/plan.png" width="533" height="300"></td>
-  </tr>
-</table>
+<p align="center">
+  <img src="images/Gazebo.png" alt="Sim" width="800"><br>
+</p>
 
 The environment contains four ArUco markers whose positions are initially unknown. To ensure a systematic search and prevent endless rotation, we define four exploration waypoints corresponding to the map corners:
 
