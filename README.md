@@ -13,6 +13,7 @@ Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Ar
 - [Installation and configuration – bundle workspace](#installation-and-configuration--bundle-workspace)
   - [Prerequisites](#prerequisites)
   - [Husarion robot simulation](#husarion-robot-simulation)
+- [Running the project](#running-the-project)
 - [Proposed solution](#proposed-solution)
 - [PlanSys2](#plansys2)
 - [RQT graph](#rqt-graph)
@@ -126,6 +127,29 @@ rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
 
 colcon build --symlink-install --packages-up-to rosbot --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
+## Running the project
+
+After building the workspace and sourcing the environment, the project must be executed using two separate terminals.
+
+1. Launch simulation and visualization
+
+In the first terminal, start Gazebo and RViz together with all the required nodes:
+
+```bash
+ros2 launch assignment2 assignment_2wheels.launch.py
+```
+
+Wait until Gazebo and RViz are fully loaded and the simulation is running correctly before proceeding.
+
+2. Start planning and execution
+
+Open a second terminal (remember to source the same workspace) and start the PlanSys2 planning and execution pipeline:
+
+```bash
+ros2 run plansys_interface get_plan_and_execute
+```
+
+At this point, PlanSys2 generates a valid plan and sequentially executes the actions, allowing the robot to explore the environment, detect all ArUco markers, and finally visit and “capture” them in ascending order of marker ID.
 
 ## Proposed solution
 
