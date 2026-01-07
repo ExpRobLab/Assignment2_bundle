@@ -21,7 +21,6 @@ Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Ar
 - [PDDL model](#pddl-model)
 - [Nodes and runtime logic](#nodes-and-runtime-logic)
 - [Topics](#topics)
-- [Build & run](#build-and-run)
 - [Results](#results)
 
 ## Overview
