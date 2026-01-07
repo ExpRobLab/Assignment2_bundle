@@ -39,8 +39,7 @@ Assignment requirements:
 - [x] Created one (or more, if needed) ROS2 packages that implement the requested behavior;
 - [x] Published the new package on your own repository;
 - [x] Created a comprehensive ReadMe;
-- [ ] Added a video to your ReadMe, showing the behaviour of owr code:
-  - [ ]  Added a video to your ReadMe, showing the behaviour of owr code with real robot.
+- [x] Added a video to your ReadMe, showing the behaviour of our code.
 
 ## Installation and configuration – bundle workspace
 
@@ -337,15 +336,17 @@ source install/local_setup.bash
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 source ~/assignment_ws/install/setup.bash
-ros2 launch assignment1 assignment.launch.py world:=simple_world.sdf
+ros2 launch assignment2 assignment_2wheels.launch.py world:=simple_world.sdf
 ```
 **Terminal 2: Terminal client**
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 source ~/assignment_ws/install/setup.bash
-ros2 run plansys2_terminal plansys2_terminal
+ros2 run plansys_interface get_plan_and_execute
 ```
 In the second terminal, run `get plan` in order to generate a plan and then run `run` for robot to start.
+
+---
 
 ### 9) Results
 #### 9.1 Output images
@@ -357,3 +358,7 @@ In the second terminal, run `get plan` in order to generate a plan and then run 
 </p>
 
 #### 9.2 Video demo
+<p align="center">
+  <video src="images/demo.mp4" controls autoplay loop muted width="800"></video>
+</p>
+
