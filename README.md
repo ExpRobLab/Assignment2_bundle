@@ -333,7 +333,13 @@ ros2 run plansys2_terminal plansys2_terminal
 ```
 In the second terminal, run `get plan` in order to generate a plan and then run `run` for robot to start.
 
-### 9) Results (place holder)
+### 9) Results
 #### 9.1 Output images
+<p align="center">
+  <img src="images/marker1_64.png" alt="marker1_64.png" width="800"><br>
+  <img src="images/marker2_0.png" alt="marker2_0.png" width="800"><br>
+  <img src="images/marker3_576.png" alt="marker3_576.png" width="800"><br>
+  <img src="images/marker4_832.png" alt="marker4_832.png" width="800">
+</p>
 
 #### 9.2 Video demo
