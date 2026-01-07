@@ -154,7 +154,9 @@ The ROS2 Planning System offers robotics developers a straightforward and effici
 
 ### RQT graph
 
-
+<p align="center">
+  <img src="images/rqt.png" alt="RQT" width="800"><br>
+</p>
 
 ### Repository structure
 
