@@ -351,40 +351,8 @@ This project implements three PDDL actions, each backed by a ROS 2 performer nod
 
 ---
 
-### Build and run
-
-#### Build workspace
-```bash
-mkdir -p ~/assignment_ws/src
-cd ~/assignment_ws/src
-
-# clone this repository
-git clone https://github.com/ExpRobLab/assignment_planning.git
-
-cd ~/assignment_ws
-rosdep install --from-paths src --ignore-src -r -y
-colcon build --symlink-install
-source install/local_setup.bash
-```
-#### Launch
-**Terminal 1: Gazebo + Robot + Nav2 + Detection + PlanSys2**
-```bash
-source /opt/ros/$ROS_DISTRO/setup.bash
-source ~/assignment_ws/install/setup.bash
-ros2 launch assignment2 assignment_2wheels.launch.py world:=simple_world.sdf
-```
-**Terminal 2: Terminal client**
-```bash
-source /opt/ros/$ROS_DISTRO/setup.bash
-source ~/assignment_ws/install/setup.bash
-ros2 run plansys_interface get_plan_and_execute
-```
-In the second terminal, run `get plan` in order to generate a plan and then run `run` for robot to start.
-
----
-
-### Results
-#### Output images
+## Results
+### Output images
 <p align="center">
   <img src="images/marker1_64.png" alt="marker1_64.png" width="800"><br>
   <img src="images/marker2_0.png" alt="marker2_0.png" width="800"><br>
