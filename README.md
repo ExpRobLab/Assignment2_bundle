@@ -11,8 +11,13 @@ Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Ar
   - [Husarion robot simulation](#husarion-robot-simulation)
 - [Proposed solution](#proposed-solution)
 - [PlanSys2](#plansys2)
-- [RQT graph](#rqt-graph) 
+- [RQT graph](#rqt-graph)
 - [Repository structure](#repository-structure)
+- [PDDL model](#pddl-model)
+- [Nodes and runtime logic](#nodes-and-runtime-logic)
+- [Topics](#topics)
+- [Build & run](#build-and-run)
+- [Results](#results)
 
 ## Overview
 
@@ -294,7 +299,7 @@ This project implements three PDDL actions, each backed by a ROS 2 performer nod
 
 ---
 
-### Topics, TF, and outputs
+### Topics
 
 #### Subscribed topics
 - `/camera/image/compressed`
@@ -316,7 +321,7 @@ This project implements three PDDL actions, each backed by a ROS 2 performer nod
 
 ---
 
-### Build & run
+### Build and run
 
 #### Build workspace
 ```bash
