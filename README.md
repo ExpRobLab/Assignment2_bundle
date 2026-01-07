@@ -220,15 +220,15 @@ assignment2_ws/
         └── worlds
 ```
 
-## 4) PDDL model
+## PDDL model
 
-### 4.1 Types & objects
+### Types & objects
 
 - `robot` - single robot
 - `marker` - waypoints
 - `base` - startnpoint
 
-### 4.2 Predicates
+### Predicates
 
 - `(robot_at ?r - robot ?m - marker)` — tracking robots position
 - `(robot_not_at ?r - robot ?m - marker)` — tracking robots position
@@ -242,7 +242,7 @@ assignment2_ws/
 - `(is_base ?b - base ?m - marker)` — marker0 == base
 - `(free ?r - robot)` — determining robots status
 
-### 4.3 Actions
+### Actions
 
 1) `move_to_detect (?r - robot ?m - marker ?m0 - marker ?b - base )`  
    Durative action. Start exploring the waypoint:
@@ -263,15 +263,15 @@ assignment2_ws/
  
 ---
 
-### 5) Nodes and runtime logic
+### Nodes and runtime logic
 
-#### 5.1 PlanSys2 orchestration
+#### PlanSys2 orchestration
 - Domain Expert loads the PDDL domain (actions, predicates, types).
 - Problem Expert*holds the current instances + predicates and the goal.
 - Planner computes a plan from the domain + current problem.
 - Executor dispatches each action in the plan to its corresponding action performer node.
 
-### 5.2 Action nodes
+### Action nodes
 This project implements three PDDL actions, each backed by a ROS 2 performer node:
 
 - **Move to detect action node**:
@@ -294,31 +294,31 @@ This project implements three PDDL actions, each backed by a ROS 2 performer nod
 
 ---
 
-### 6) Topics, TF, and outputs
+### Topics, TF, and outputs
 
-#### 6.1 Subscribed topics
+#### Subscribed topics
 - `/camera/image/compressed`
 - `/aruco_detections`
 - `/tf`
 
-#### 6.2 Published topics
+#### Published topics
 - `/Nav2`
 - `/final_marker_image`
 
-#### 6.3 Frames
+#### Frames
 - `odom`
 - `base_footprint`
 - `camera_link`
 - `marker_<id>`
 
-#### 6.4 Saved artifacts
+#### Saved artifacts
 - `output/marker_<id>.png`
 
 ---
 
-### 8) Build & run
+### Build & run
 
-#### 8.1 Build workspace
+#### Build workspace
 ```bash
 mkdir -p ~/assignment_ws/src
 cd ~/assignment_ws/src
@@ -331,7 +331,7 @@ rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 source install/local_setup.bash
 ```
-#### 8.2 Launch
+#### Launch
 **Terminal 1: Gazebo + Robot + Nav2 + Detection + PlanSys2**
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
@@ -348,8 +348,8 @@ In the second terminal, run `get plan` in order to generate a plan and then run 
 
 ---
 
-### 9) Results
-#### 9.1 Output images
+### Results
+#### Output images
 <p align="center">
   <img src="images/marker1_64.png" alt="marker1_64.png" width="800"><br>
   <img src="images/marker2_0.png" alt="marker2_0.png" width="800"><br>
@@ -357,7 +357,7 @@ In the second terminal, run `get plan` in order to generate a plan and then run 
   <img src="images/marker4_832.png" alt="marker4_832.png" width="800">
 </p>
 
-#### 9.2 Video demo
+#### Video demo
 <p align="center">
   <img src="images/demo.gif" width="700" alt="Demo" />
 </p>
