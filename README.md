@@ -359,6 +359,7 @@ In the second terminal, run `get plan` in order to generate a plan and then run 
 
 #### 9.2 Video demo
 <p align="center">
-  <video src="images/demo.mp4" controls autoplay loop muted width="800"></video>
+  <img src="images/demo.gif" width="700" alt="Demo" />
 </p>
+
 
