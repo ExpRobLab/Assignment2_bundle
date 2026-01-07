@@ -3,6 +3,10 @@
 **Authors:**  
 Gian Marco Balia, Christian Negri Ravera, Francesca Amato, Filippo Salterini, Arian Tavousi, Milad Rabiei
 
+<p align="center">
+  <img src="images/demo.gif" width="700" alt="Demo" />
+</p>
+
 ## Table of Contents
 
 - [Overview](#overview)
