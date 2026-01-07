@@ -123,8 +123,6 @@ colcon build --symlink-install --packages-up-to rosbot --cmake-args -DCMAKE_BUIL
 
 We control a mobile robot in Gazebo to search an environment until all ArUco markers are found and then visit and “capture” each marker in ascending ID order. The behavior is modeled in PDDL and executed using PlanSys2 – a planner generates a valid sequence of actions (e.g., explore → capture), and an executor runs it by activating our ROS 2 “action performer” nodes. Captures are produced by annotating the camera image and saving the final frames to disk, while also publishing the annotated image on a topic.
 
-<!-- TODO: Images are not present -->
-
 <p align="center">
   <img src="images/Gazebo.png" alt="Sim" width="800"><br>
 </p>
@@ -224,29 +222,48 @@ assignment2_ws/
 ```
 
 ## 4) PDDL model
-<!-- TODO: remove "(Milad's code)" and fix below probably -->
 
-#### 4.1 Types & objects
+## 4) PDDL model
 
-- `robot` (single robot)
+### 4.1 Types & objects
 
-#### 4.2 Core predicates
+- `robot` - single robot
+- `marker` - waypoints
+- `base` - startnpoint
 
-- `(pipeline_ready ?r)` — initial start
-- `(pipeline_explored ?r)` — "explore" phase completed
-- `(pipeline_captured ?r)` — final annotated “capture” completed
+### 4.2 Predicates
 
-#### 4.3 Actions
+- `(robot_at ?r - robot ?m - marker)` — tracking robots position
+- `(robot_not_at ?r - robot ?m - marker)` — tracking robots position
+- `(detected ?m - marker)` — tracking visited ArUco marker's during detect mode
+- `(undetected ?m - marker)` — tracking remaining ArUco marker's during detect mode
+- `(photo_mode)` — state change after sucessful detections
+- `(detect_mode)` — initial state of the robot
+- `(photographed ?m - marker)` — tracking photographed ArUco marker's during photo mode
+- `(unphotographed ?m - marker)` — final annotated “capture” completed during photo mode
+- `(at_base ?r - robot ?b - base)` — position check for state change action
+- `(is_base ?b - base ?m - marker)` — marker0 == base
+- `(free ?r - robot)` — determining robots status
 
-1) `explore(?r)`  
-   Durative action. Start exploring the waypoints:
-   - store each detected marker
+### 4.3 Actions
 
-2) `capture_marker(?r)`  
+1) `move_to_detect (?r - robot ?m - marker ?m0 - marker ?b - base )`  
+   Durative action. Start exploring the waypoint:
+   - starts at base and goes to the given waypoint
+   - changes marker's status to detected
+   - stores the detected marker
+
+2) `change_state (?r - robot ?m1 - marker ?m2 - marker ?m3 - marker ?m4 - marker ?m0 - marker ?b - base)`  
+   Durative action. Changes robots state:
+   - robot returns to base
+   - changes operation mode to "photo_mode"
+
+3) `move_to_photograph (?r - robot ?m - marker)`  
    Durative action. Produces the deliverable output:
-   - annotate camera frame
-   - publish annotated images on a topic
-   - save image to disk   
+   - moves towards determined waypoint
+   - centers and takes a photo
+   - publish annotated image on a topic
+ 
 ---
 
 ### 5) Nodes and runtime logic
@@ -257,18 +274,24 @@ assignment2_ws/
 - Planner computes a plan from the domain + current problem.
 - Executor dispatches each action in the plan to its corresponding action performer node.
 
-#### 5.2 Action performers
-This project implements two PDDL actions, each backed by a ROS 2 performer node:
+### 5.2 Action nodes
+This project implements three PDDL actions, each backed by a ROS 2 performer node:
 
-- **Explore action performer**:
+- **Move to detect action node**:
   - receives the dispatched action parameters,
   - navigates to the waypoint and performs the search behavior (rotate while waiting for detections),
-  - updates the Problem Expert with newly discovered marker facts,
-  - returns success/failure to the PlanSys2 executor after performing all the scans.
+  - updates the Problem Expert with newly discovered marker,
+  - returns success/failure to the PlanSys2 executor after performing the scans.
 
-- **Capture action performer**:
+- **Change state action node**:
   - receives the dispatched action parameters,
-  - navigates and then aligns to the marker,
+  - navigates to the base waypoint,
+  - sorts all the ArUco marker's ids,
+  - returns success/failure to the PlanSys2 executor.
+
+- **Move to phorograph action node**:
+  - receives the dispatched action parameters,
+  - navigates to marker and then aligns to the marker,
   - “takes the picture” by annotating the camera frame, publishing it, and saving it to disk,
   - returns success/failure to the PlanSys2 executor.
 
@@ -283,7 +306,7 @@ This project implements two PDDL actions, each backed by a ROS 2 performer node:
 
 #### 6.2 Published topics
 - `/Nav2`
-- `/final_marker_image` (annotated image output)
+- `/final_marker_image`
 
 #### 6.3 Frames
 - `odom`
@@ -292,7 +315,7 @@ This project implements two PDDL actions, each backed by a ROS 2 performer node:
 - `marker_<id>`
 
 #### 6.4 Saved artifacts
-- `output/marker_<id>.png` (final annotated captures)
+- `output/marker_<id>.png`
 
 ---
 
