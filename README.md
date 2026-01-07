@@ -223,8 +223,6 @@ assignment2_ws/
 
 ## 4) PDDL model
 
-## 4) PDDL model
-
 ### 4.1 Types & objects
 
 - `robot` - single robot
